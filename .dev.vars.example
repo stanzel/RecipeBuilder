@@ -1,0 +1,5 @@
+# Copy to .dev.vars for local development (never commit .dev.vars).
+# Get a free key at https://fdc.nal.usda.gov/api-key-signup ; DEMO_KEY works but allows only 30 requests/hour, 50/day.
+FDC_API_KEY=DEMO_KEY
+# Optional: identify the app to Open Food Facts with a contact.
+# OFF_USER_AGENT=RecipeNutritionCalculator/1.0 (you@example.com)

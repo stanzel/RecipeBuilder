@@ -1,0 +1,38 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "recipe-nutrition",
+  "main": "src/worker/index.ts",
+  "compatibility_date": "2026-11-13",
+  "workers_dev": true,
+
+  // Build the browser bundle before `wrangler dev` / `wrangler deploy`.
+  "build": { "command": "npm run build" },
+
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    // The Worker only runs for API routes; everything else is a static file.
+    "run_worker_first": ["/api/*"],
+    "not_found_handling": "single-page-application"
+  },
+
+  // Secrets (set with `npx wrangler secret put <NAME>`, never committed):
+  //   FDC_API_KEY     required  data.gov key for USDA FoodData Central
+  //   OFF_USER_AGENT  optional  e.g. "RecipeNutritionCalculator/1.0 (you@example.com)".
+  //                             Without it the app sends "RecipeNutritionCalculator/1.0 (+https://<your site>)".
+
+  // Workers Rate Limiting binding. Limits are per Cloudflare location and approximate.
+  // namespace_id values must be unique positive integers within your account.
+  "ratelimits": [
+    // Per visitor (keyed by client IP): all /api calls.
+    { "name": "RL_CLIENT", "namespace_id": "41001", "simple": { "limit": 60, "period": 60 } },
+    // Upstream budgets shared by all visitors, kept under provider limits.
+    // USDA: 1,000 requests/hour per API key.
+    { "name": "RL_USDA", "namespace_id": "41002", "simple": { "limit": 15, "period": 60 } },
+    // Open Food Facts: 15 product reads/min and 10 searches/min.
+    { "name": "RL_OFF_PRODUCT", "namespace_id": "41003", "simple": { "limit": 12, "period": 60 } },
+    { "name": "RL_OFF_SEARCH", "namespace_id": "41004", "simple": { "limit": 8, "period": 60 } }
+  ],
+
+  "observability": { "enabled": true }
+}

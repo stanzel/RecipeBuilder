@@ -1,0 +1,28 @@
+{
+  "name": "recipe-nutrition-calculator",
+  "version": "1.0.0",
+  "description": "Mobile-first recipe nutrition calculator on a single Cloudflare Worker",
+  "scripts": {
+    "build": "node scripts/build-client.mjs",
+    "dev": "wrangler dev",
+    "dev:remote": "wrangler dev --remote",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "check": "npm run typecheck && npm test && npm run build && wrangler deploy --dry-run",
+    "deploy": "wrangler deploy"
+  },
+  "type": "module",
+  "dependencies": {
+    "barcode-detector": "^3.2.3",
+    "preact": "^11.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "esbuild": "^0.28.2",
+    "typescript": "^7.0.2",
+    "vitest": "^5.1.0",
+    "wrangler": "^4.162.0"
+  },
+  "private": true
+}

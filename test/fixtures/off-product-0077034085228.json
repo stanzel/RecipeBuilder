@@ -1,0 +1,85 @@
+{
+ "code": "0077034085228",
+ "errors": [],
+ "product": {
+  "code": "0077034085228",
+  "nutriments": {
+   "carbohydrates": 42.86,
+   "carbohydrates_100g": 42.86,
+   "carbohydrates_serving": 12,
+   "carbohydrates_unit": "g",
+   "carbohydrates_value": 42.86,
+   "energy": 2092,
+   "energy-kcal": 500,
+   "energy-kcal_100g": 500,
+   "energy-kcal_serving": 140,
+   "energy-kcal_unit": "kcal",
+   "energy-kcal_value": 500,
+   "energy_100g": 2092,
+   "energy_serving": 586,
+   "energy_unit": "kJ",
+   "energy_value": 2092,
+   "fat": 32.14,
+   "fat_100g": 32.14,
+   "fat_serving": 9,
+   "fat_unit": "g",
+   "fat_value": 32.14,
+   "fiber": 7.1,
+   "fiber_100g": 7.1,
+   "fiber_serving": 1.99,
+   "fiber_unit": "g",
+   "fiber_value": 7.1,
+   "proteins": 14.29,
+   "proteins_100g": 14.29,
+   "proteins_serving": 4,
+   "proteins_unit": "g",
+   "proteins_value": 14.29,
+   "salt": 0,
+   "salt_100g": 0,
+   "salt_serving": 0,
+   "salt_unit": "g",
+   "salt_value": 0,
+   "sodium": 0,
+   "sodium_100g": 0,
+   "sodium_serving": 0,
+   "sodium_unit": "g",
+   "sodium_value": 0,
+   "sugars": 28.57,
+   "sugars_100g": 28.57,
+   "sugars_serving": 8,
+   "sugars_unit": "g",
+   "sugars_value": 28.57
+  },
+  "nutrition_data": "on",
+  "nutrition_data_per": "100g",
+  "nutrition_data_prepared_per": "100g",
+  "product_name": "Nut 'n berry mix",
+  "serving_quantity": 28,
+  "serving_quantity_unit": "g",
+  "serving_size": "1 ONZ (28 g)"
+ },
+ "result": {
+  "id": "product_found",
+  "lc_name": "Product found",
+  "name": "Product found"
+ },
+ "status": "success_with_warnings",
+ "warnings": [
+  {
+   "field": {
+    "id": "code",
+    "value": "0077034085228"
+   },
+   "impact": {
+    "id": "none",
+    "lc_name": "None",
+    "name": "None"
+   },
+   "message": {
+    "id": "different_normalized_product_code",
+    "lc_name": "",
+    "name": ""
+   }
+  }
+ ]
+}

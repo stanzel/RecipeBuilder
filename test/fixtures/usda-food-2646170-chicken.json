@@ -1,0 +1,406 @@
+{
+ "fdcId": 2646170,
+ "description": "Chicken, breast, boneless, skinless, raw",
+ "dataType": "Foundation",
+ "publicationDate": "10/26/2023",
+ "foodPortions": [
+  {
+   "gramWeight": 114.0,
+   "amount": 1.0,
+   "measureUnit": {
+    "id": 1121,
+    "name": "RACC",
+    "abbreviation": "RACC"
+   }
+  }
+ ],
+ "foodCategory": {
+  "description": "Poultry Products"
+ },
+ "foodNutrients": [
+  {
+   "type": "FoodNutrient",
+   "nutrient": {
+    "id": 2047,
+    "number": "957",
+    "name": "Energy (Atwater General Factors)",
+    "rank": 280,
+    "unitName": "kcal"
+   },
+   "id": 33295327,
+   "amount": 106.034,
+   "nutrientAnalysisDetails": []
+  },
+  {
+   "type": "FoodNutrient",
+   "nutrient": {
+    "id": 2048,
+    "number": "958",
+    "name": "Energy (Atwater Specific Factors)",
+    "rank": 290,
+    "unitName": "kcal"
+   },
+   "id": 33295328,
+   "amount": 112.20227,
+   "nutrientAnalysisDetails": []
+  },
+  {
+   "type": "FoodNutrient",
+   "nutrient": {
+    "id": 1003,
+    "number": "203",
+    "name": "Protein",
+    "rank": 600,
+    "unitName": "g"
+   },
+   "id": 33295325,
+   "amount": 22.525,
+   "nutrientAnalysisDetails": []
+  },
+  {
+   "type": "FoodNutrient",
+   "nutrient": {
+    "id": 1004,
+    "number": "204",
+    "name": "Total lipid (fat)",
+    "rank": 800,
+    "unitName": "g"
+   },
+   "id": 33295220,
+   "amount": 1.934,
+   "nutrientAnalysisDetails": [
+    {
+     "subSampleId": 2647058,
+     "nutrientId": 1004,
+     "nutrientAcquisitionDetails": [
+      {
+       "sampleUnitId": 2646208,
+       "purchaseDate": "2/27/2023",
+       "storeCity": "Blacksburg",
+       "storeState": "VA",
+       "packerCity": "Cincinnati, OH",
+       "packerState": "OH"
+      }
+     ],
+     "amount": 1.58,
+     "labMethodTechnique": "Acid hydrolysis",
+     "labMethodDescription": "AOAC 989.05 mod",
+     "labMethodOriginalDescription": "Silliker modified 989.05 (33.2.26) Fat in Milk, Mojo, Acid Hydrolysis",
+     "labMethodLink": "https://doi.org/10.1093/9780197610145.001.0001"
+    },
+    {
+     "subSampleId": 2647061,
+     "nutrientId": 1004,
+     "nutrientAcquisitionDetails": [
+      {
+       "sampleUnitId": 2646210,
+       "purchaseDate": "3/1/2023",
+       "storeCity": "Blacksburg",
+       "storeState": "VA",
+       "packerCity": "Harrisonburg, VA",
+       "packerState": "VA"
+      }
+     ],
+     "amount": 2.39,
+     "labMethodTechnique": "Acid hydrolysis",
+     "labMethodDescription": "AOAC 989.05 mod",
+     "labMethodOriginalDescription": "Silliker modified 989.05 (33.2.26) Fat in Milk, Mojo, Acid Hydrolysis",
+     "labMethodLink": "https://doi.org/10.1093/9780197610145.001.0001"
+    },
+    {
+     "subSampleId": 2647064,
+     "nutrientId": 1004,
+     "nutrientAcquisitionDetails": [
+      {
+       "sampleUnitId": 2646212,
+       "purchaseDate": "3/1/2023",
+       "storeCity": "Blacksburg",
+       "storeState": "VA",
+       "packerCity": "Salisbury, MD",
+       "packerState": "MD"
+      }
+     ],
+     "amount": 1.55,
+     "labMethodTechnique": "Acid hydrolysis",
+     "labMethodDescription": "AOAC 989.05 mod",
+     "labMethodOriginalDescription": "Silliker modified 989.05 (33.2.26) Fat in Milk, Mojo, Acid Hydrolysis",
+     "labMethodLink": "https://doi.org/10.1093/9780197610145.001.0001"
+    },
+    {
+     "subSampleId": 2647067,
+     "nutrientId": 1004,
+     "nutrientAcquisitionDetails": [
+      {
+       "sampleUnitId": 2646214,
+       "purchaseDate": "3/6/2023",
+       "storeCity": "Blacksburg",
+       "storeState": "VA",
+       "packerCity": "Baldwin, GA",
+       "packerState": "GA"
+      }
+     ],
+     "amount": 3.1,
+     "labMethodTechnique": "Acid hydrolysis",
+     "labMethodDescription": "AOAC 989.05 mod",
+     "labMethodOriginalDescription": "Silliker modified 989.05 (33.2.26) Fat in Milk, Mojo, Acid Hydrolysis",
+     "labMethodLink": "https://doi.org/10.1093/9780197610145.001.0001"
+    },
+    {
+     "subSampleId": 2647070,
+     "nutrientId": 1004,
+     "nutrientAcquisitionDetails": [
+      {
+       "sampleUnitId": 2646216,
+       "purchaseDate": "3/9/2023",
+       "storeCity": "Blacksburg",
+       "storeState": "VA",
+       "packerCity": "Cincinnati, OH",
+       "packerState": "OH"
+      }
+     ],
+     "amount": 1.31,
+     "labMethodTechnique": "Acid hydrolysis",
+     "labMethodDescription": "AOAC 989.05 mod",
+     "labMethodOriginalDescription": "Silliker modified 989.05 (33.2.26) Fat in Milk, Mojo, Acid Hydrolysis",
+     "labMethodLink": "https://doi.org/10.1093/9780197610145.001.0001"
+    },
+    {
+     "subSampleId": 2647073,
+     "nutrientId": 1004,
+     "nutrientAcquisitionDetails": [
+      {
+       "sampleUnitId": 2646218,
+       "purchaseDate": "3/13/2023",
+       "storeCity": "Christiansburg",
+       "storeState": "VA",
+       "packerCity": "Bentonville, AR",
+       "packerState": "AR"
+      }
+     ],
+     "amount": 2.39,
+     "labMethodTechnique": "Acid hydrolysis",
+     "labMethodDescription": "AOAC 989.05 mod",
+     "labMethodOriginalDescription": "Silliker modified 989.05 (33.2.26) Fat in Milk, Mojo, Acid Hydrolysis",
+     "labMethodLink": "https://doi.org/10.1093/9780197610145.001.0001"
+    },
+    {
+     "subSampleId": 2647076,
+     "nutrientId": 1004,
+     "nutrientAcquisitionDetails": [
+      {
+       "sampleUnitId": 2646220,
+       "purchaseDate": "3/17/2023",
+       "storeCity": "Wytheville",
+       "storeState": "VA",
+       "packerCity": "Springdale, AR",
+       "packerState": "AR"
+      }
+     ],
+     "amount": 1.84,
+     "labMethodTechnique": "Acid hydrolysis",
+     "labMethodDescription": "AOAC 989.05 mod",
+     "labMethodOriginalDescription": "Silliker modified 989.05 (33.2.26) Fat in Milk, Mojo, Acid Hydrolysis",
+     "labMethodLink": "https://doi.org/10.1093/9780197610145.001.0001"
+    },
+    {
+     "subSampleId": 2647079,
+     "nutrientId": 1004,
+     "nutrientAcquisitionDetails": [
+      {
+       "sampleUnitId": 2646222,
+       "purchaseDate": "4/3/2023",
+       "storeCity": "Christiansburg",
+       "storeState": "VA",
+       "packerCity": "Baldwin, GA",
+       "packerState": "GA"
+      }
+     ],
+     "amount": 1.31,
+     "labMethodTechnique": "Acid hydrolysis",
+     "labMethodDescription": "AOAC 989.05 mod",
+     "labMethodOriginalDescription": "Silliker modified 989.05 (33.2.26) Fat in Milk, Mojo, Acid Hydrolysis",
+     "labMethodLink": "https://doi.org/10.1093/9780197610145.001.0001"
+    }
+   ]
+  },
+  {
+   "type": "FoodNutrient",
+   "nutrient": {
+    "id": 1005,
+    "number": "205",
+    "name": "Carbohydrate, by difference",
+    "rank": 1110,
+    "unitName": "g"
+   },
+   "id": 33295326,
+   "amount": 0,
+   "nutrientAnalysisDetails": []
+  },
+  {
+   "type": "FoodNutrient",
+   "nutrient": {
+    "id": 1093,
+    "number": "307",
+    "name": "Sodium, Na",
+    "rank": 5800,
+    "unitName": "mg"
+   },
+   "id": 33295214,
+   "amount": 65.75,
+   "nutrientAnalysisDetails": [
+    {
+     "subSampleId": 2646465,
+     "nutrientId": 1093,
+     "nutrientAcquisitionDetails": [
+      {
+       "sampleUnitId": 2646208,
+       "purchaseDate": "2/27/2023",
+       "storeCity": "Blacksburg",
+       "storeState": "VA",
+       "packerCity": "Cincinnati, OH",
+       "packerState": "OH"
+      }
+     ],
+     "amount": 66.0,
+     "labMethodTechnique": "ICP",
+     "labMethodDescription": "AOAC 985.01 + 984.27",
+     "labMethodOriginalDescription": "Covance modified 985.01 (3.2.06) + 984.27 (50.1.15) Metals in Food by ICP",
+     "labMethodLink": "https://doi.org/10.1093/9780197610145.001.0001"
+    },
+    {
+     "subSampleId": 2646474,
+     "nutrientId": 1093,
+     "nutrientAcquisitionDetails": [
+      {
+       "sampleUnitId": 2646210,
+       "purchaseDate": "3/1/2023",
+       "storeCity": "Blacksburg",
+       "storeState": "VA",
+       "packerCity": "Harrisonburg, VA",
+       "packerState": "VA"
+      }
+     ],
+     "amount": 67.0,
+     "labMethodTechnique": "ICP",
+     "labMethodDescription": "AOAC 985.01 + 984.27",
+     "labMethodOriginalDescription": "Covance modified 985.01 (3.2.06) + 984.27 (50.1.15) Metals in Food by ICP",
+     "labMethodLink": "https://doi.org/10.1093/9780197610145.001.0001"
+    },
+    {
+     "subSampleId": 2646483,
+     "nutrientId": 1093,
+     "nutrientAcquisitionDetails": [
+      {
+       "sampleUnitId": 2646212,
+       "purchaseDate": "3/1/2023",
+       "storeCity": "Blacksburg",
+       "storeState": "VA",
+       "packerCity": "Salisbury, MD",
+       "packerState": "MD"
+      }
+     ],
+     "amount": 84.8,
+     "labMethodTechnique": "ICP",
+     "labMethodDescription": "AOAC 985.01 + 984.27",
+     "labMethodOriginalDescription": "Covance modified 985.01 (3.2.06) + 984.27 (50.1.15) Metals in Food by ICP",
+     "labMethodLink": "https://doi.org/10.1093/9780197610145.001.0001"
+    },
+    {
+     "subSampleId": 2646492,
+     "nutrientId": 1093,
+     "nutrientAcquisitionDetails": [
+      {
+       "sampleUnitId": 2646214,
+       "purchaseDate": "3/6/2023",
+       "storeCity": "Blacksburg",
+       "storeState": "VA",
+       "packerCity": "Baldwin, GA",
+       "packerState": "GA"
+      }
+     ],
+     "amount": 70.2,
+     "labMethodTechnique": "ICP",
+     "labMethodDescription": "AOAC 985.01 + 984.27",
+     "labMethodOriginalDescription": "Covance modified 985.01 (3.2.06) + 984.27 (50.1.15) Metals in Food by ICP",
+     "labMethodLink": "https://doi.org/10.1093/9780197610145.001.0001"
+    },
+    {
+     "subSampleId": 2646501,
+     "nutrientId": 1093,
+     "nutrientAcquisitionDetails": [
+      {
+       "sampleUnitId": 2646216,
+       "purchaseDate": "3/9/2023",
+       "storeCity": "Blacksburg",
+       "storeState": "VA",
+       "packerCity": "Cincinnati, OH",
+       "packerState": "OH"
+      }
+     ],
+     "amount": 55.5,
+     "labMethodTechnique": "ICP",
+     "labMethodDescription": "AOAC 985.01 + 984.27",
+     "labMethodOriginalDescription": "Covance modified 985.01 (3.2.06) + 984.27 (50.1.15) Metals in Food by ICP",
+     "labMethodLink": "https://doi.org/10.1093/9780197610145.001.0001"
+    },
+    {
+     "subSampleId": 2646771,
+     "nutrientId": 1093,
+     "nutrientAcquisitionDetails": [
+      {
+       "sampleUnitId": 2646218,
+       "purchaseDate": "3/13/2023",
+       "storeCity": "Christiansburg",
+       "storeState": "VA",
+       "packerCity": "Bentonville, AR",
+       "packerState": "AR"
+      }
+     ],
+     "amount": 48.9,
+     "labMethodTechnique": "ICP",
+     "labMethodDescription": "AOAC 985.01 + 984.27",
+     "labMethodOriginalDescription": "Covance modified 985.01 (3.2.06) + 984.27 (50.1.15) Metals in Food by ICP",
+     "labMethodLink": "https://doi.org/10.1093/9780197610145.001.0001"
+    },
+    {
+     "subSampleId": 2646780,
+     "nutrientId": 1093,
+     "nutrientAcquisitionDetails": [
+      {
+       "sampleUnitId": 2646220,
+       "purchaseDate": "3/17/2023",
+       "storeCity": "Wytheville",
+       "storeState": "VA",
+       "packerCity": "Springdale, AR",
+       "packerState": "AR"
+      }
+     ],
+     "amount": 66.4,
+     "labMethodTechnique": "ICP",
+     "labMethodDescription": "AOAC 985.01 + 984.27",
+     "labMethodOriginalDescription": "Covance modified 985.01 (3.2.06) + 984.27 (50.1.15) Metals in Food by ICP",
+     "labMethodLink": "https://doi.org/10.1093/9780197610145.001.0001"
+    },
+    {
+     "subSampleId": 2646789,
+     "nutrientId": 1093,
+     "nutrientAcquisitionDetails": [
+      {
+       "sampleUnitId": 2646222,
+       "purchaseDate": "4/3/2023",
+       "storeCity": "Christiansburg",
+       "storeState": "VA",
+       "packerCity": "Baldwin, GA",
+       "packerState": "GA"
+      }
+     ],
+     "amount": 67.2,
+     "labMethodTechnique": "ICP",
+     "labMethodDescription": "AOAC 985.01 + 984.27",
+     "labMethodOriginalDescription": "Covance modified 985.01 (3.2.06) + 984.27 (50.1.15) Metals in Food by ICP",
+     "labMethodLink": "https://doi.org/10.1093/9780197610145.001.0001"
+    }
+   ]
+  }
+ ]
+}

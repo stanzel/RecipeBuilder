@@ -1,0 +1,149 @@
+{
+ "fdcId": 170026,
+ "description": "Potatoes, flesh and skin, raw",
+ "dataType": "SR Legacy",
+ "publicationDate": "4/1/2019",
+ "foodPortions": [
+  {
+   "gramWeight": 170.0,
+   "amount": 1.0,
+   "modifier": "Potato small (1-3/4\" to 2-1/2\" dia)",
+   "measureUnit": {
+    "id": 9999,
+    "name": "undetermined",
+    "abbreviation": "undetermined"
+   }
+  },
+  {
+   "gramWeight": 75.0,
+   "amount": 0.5,
+   "modifier": "cup, diced",
+   "measureUnit": {
+    "id": 9999,
+    "name": "undetermined",
+    "abbreviation": "undetermined"
+   }
+  },
+  {
+   "gramWeight": 369.0,
+   "amount": 1.0,
+   "modifier": "Potato large (3\" to 4-1/4\" dia)",
+   "measureUnit": {
+    "id": 9999,
+    "name": "undetermined",
+    "abbreviation": "undetermined"
+   }
+  },
+  {
+   "gramWeight": 213.0,
+   "amount": 1.0,
+   "modifier": "Potato medium (2-1/4\" to 3-1/4\" dia)",
+   "measureUnit": {
+    "id": 9999,
+    "name": "undetermined",
+    "abbreviation": "undetermined"
+   }
+  }
+ ],
+ "foodCategory": {
+  "description": "Vegetables and Vegetable Products"
+ },
+ "foodNutrients": [
+  {
+   "type": "FoodNutrient",
+   "nutrient": {
+    "id": 1008,
+    "number": "208",
+    "name": "Energy",
+    "rank": 300,
+    "unitName": "kcal"
+   },
+   "id": 1488814,
+   "amount": 77.0
+  },
+  {
+   "type": "FoodNutrient",
+   "nutrient": {
+    "id": 1062,
+    "number": "268",
+    "name": "Energy",
+    "rank": 400,
+    "unitName": "kJ"
+   },
+   "id": 1488843,
+   "amount": 322.0
+  },
+  {
+   "type": "FoodNutrient",
+   "nutrient": {
+    "id": 1003,
+    "number": "203",
+    "name": "Protein",
+    "rank": 600,
+    "unitName": "g"
+   },
+   "id": 1488836,
+   "amount": 2.05
+  },
+  {
+   "type": "FoodNutrient",
+   "nutrient": {
+    "id": 1004,
+    "number": "204",
+    "name": "Total lipid (fat)",
+    "rank": 800,
+    "unitName": "g"
+   },
+   "id": 1488784,
+   "amount": 0.09
+  },
+  {
+   "type": "FoodNutrient",
+   "nutrient": {
+    "id": 1005,
+    "number": "205",
+    "name": "Carbohydrate, by difference",
+    "rank": 1110,
+    "unitName": "g"
+   },
+   "id": 1488857,
+   "amount": 17.49
+  },
+  {
+   "type": "FoodNutrient",
+   "nutrient": {
+    "id": 1079,
+    "number": "291",
+    "name": "Fiber, total dietary",
+    "rank": 1200,
+    "unitName": "g"
+   },
+   "id": 1488841,
+   "amount": 2.1
+  },
+  {
+   "type": "FoodNutrient",
+   "nutrient": {
+    "id": 2000,
+    "number": "269",
+    "name": "Total Sugars",
+    "rank": 1510,
+    "unitName": "g"
+   },
+   "id": 1488866,
+   "amount": 0.82
+  },
+  {
+   "type": "FoodNutrient",
+   "nutrient": {
+    "id": 1093,
+    "number": "307",
+    "name": "Sodium, Na",
+    "rank": 5800,
+    "unitName": "mg"
+   },
+   "id": 1488820,
+   "amount": 6.0
+  }
+ ]
+}

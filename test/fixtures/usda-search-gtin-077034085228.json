@@ -1,0 +1,72 @@
+{
+ "totalHits": 1,
+ "currentPage": 1,
+ "totalPages": 1,
+ "foods": [
+  {
+   "fdcId": 2105222,
+   "description": "NUT 'N BERRY MIX",
+   "dataType": "Branded",
+   "gtinUpc": "077034085228",
+   "brandOwner": "Kar Nut Products Company",
+   "brandName": "KAR'S",
+   "servingSize": 28.0,
+   "servingSizeUnit": "g",
+   "householdServingFullText": "1 ONZ",
+   "packageWeight": "18 oz/510 g",
+   "foodCategory": "Popcorn, Peanuts, Seeds & Related Snacks",
+   "publishedDate": "2021-10-28",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "nutrientName": "Protein",
+     "nutrientNumber": "203",
+     "unitName": "G",
+     "value": 14.3
+    },
+    {
+     "nutrientId": 1004,
+     "nutrientName": "Total lipid (fat)",
+     "nutrientNumber": "204",
+     "unitName": "G",
+     "value": 32.1
+    },
+    {
+     "nutrientId": 1005,
+     "nutrientName": "Carbohydrate, by difference",
+     "nutrientNumber": "205",
+     "unitName": "G",
+     "value": 42.9
+    },
+    {
+     "nutrientId": 1008,
+     "nutrientName": "Energy",
+     "nutrientNumber": "208",
+     "unitName": "KCAL",
+     "value": 500
+    },
+    {
+     "nutrientId": 2000,
+     "nutrientName": "Total Sugars",
+     "nutrientNumber": "269",
+     "unitName": "G",
+     "value": 28.6
+    },
+    {
+     "nutrientId": 1079,
+     "nutrientName": "Fiber, total dietary",
+     "nutrientNumber": "291",
+     "unitName": "G",
+     "value": 7.1
+    },
+    {
+     "nutrientId": 1093,
+     "nutrientName": "Sodium, Na",
+     "nutrientNumber": "307",
+     "unitName": "MG",
+     "value": 0.0
+    }
+   ]
+  }
+ ]
+}
