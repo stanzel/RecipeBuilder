@@ -183,6 +183,26 @@ describe("search and food detail", () => {
     expect(res.headers.get("Cache-Control")).toContain("s-maxage");
   });
 
+  it("encodes USDA dataType values with %20, never '+' (FDC matches them exactly)", async () => {
+    const m = mockFetch([[USDA_SEARCH, () => jsonResponse({ foods: [] })]]);
+    await call("/api/search?q=white%20sugar", m.fetch);
+    const raw = m.calls[0].url;
+    expect(raw).toContain("query=white%20sugar");
+    expect(raw).toContain("dataType=Foundation%2CSR%20Legacy%2CSurvey%20(FNDDS)");
+    expect(raw).not.toContain("+");
+  });
+
+  it("explains a USDA 400 without leaking the API key", async () => {
+    const m = mockFetch([
+      [USDA_SEARCH, () => jsonResponse({ error: { code: "BAD_REQUEST", message: "Invalid dataType for api_key=test-key" } }, 400)],
+    ]);
+    const res = await call("/api/search?q=white%20sugar", m.fetch);
+    expect(res.status).toBe(502);
+    const body = await res.json();
+    expect(body.message).toContain("HTTP 400 (Invalid dataType");
+    expect(body.message).not.toContain("test-key");
+  });
+
   it("includes branded foods on request", async () => {
     const m = mockFetch([[USDA_SEARCH, () => jsonResponse({ foods: [] })]]);
     await call("/api/search?q=yogurt&branded=1", m.fetch);

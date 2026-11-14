@@ -39,18 +39,50 @@ export async function getJson<T>(
     throw new ProviderError("misconfigured", source, `${sourceLabel(source)} rejected the request (HTTP ${res.status}). Check the API key / User-Agent configuration.`);
   }
 
+  const text = await res.text().catch(() => "");
   let body: T | null = null;
   try {
-    body = (await res.json()) as T;
+    body = text ? (JSON.parse(text) as T) : null;
   } catch {
     body = null;
   }
   if (res.status === 404) return { status: 404, body };
   if (!res.ok) {
-    throw new ProviderError("upstream_error", source, `${sourceLabel(source)} returned HTTP ${res.status}.`);
+    const detail = upstreamDetail(text);
+    console.error(`${source} HTTP ${res.status} for ${redact(url)}${detail ? `: ${detail}` : ""}`);
+    throw new ProviderError("upstream_error", source, `${sourceLabel(source)} returned HTTP ${res.status}${detail ? ` (${detail})` : ""}.`);
   }
   if (body === null) throw new ProviderError("upstream_error", source, `${sourceLabel(source)} returned an unreadable response.`);
   return { status: res.status, body };
+}
+
+/** Remove API keys from a URL or text before logging or returning it. */
+export function redact(s: string): string {
+  return s.replace(/(api_key=)[^&\s"']+/gi, "$1[redacted]");
+}
+
+/** A short, safe excerpt of an upstream error body (USDA explains bad parameters here). */
+function upstreamDetail(text: string): string {
+  if (!text) return "";
+  let msg = text;
+  try {
+    const j = JSON.parse(text);
+    msg = j?.error?.message ?? j?.message ?? j?.error ?? (Array.isArray(j?.errors) ? j.errors.join("; ") : text);
+    if (typeof msg !== "string") msg = JSON.stringify(msg);
+  } catch {
+    /* plain text */
+  }
+  return redact(msg.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim()).slice(0, 200);
+}
+
+/**
+ * Build a query string with %20 for spaces (not "+"). FDC matches dataType values
+ * such as "SR Legacy" and "Survey (FNDDS)" exactly; this is the form verified against the live API.
+ */
+export function queryString(params: Record<string, string>): string {
+  return Object.entries(params)
+    .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`)
+    .join("&");
 }
 
 export function sourceLabel(source: SourceId): string {

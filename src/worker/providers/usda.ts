@@ -7,7 +7,7 @@ import { completeSaltSodium } from "../../shared/nutrition";
 import { formatQuantity, parseQuantityPrefix } from "../../shared/parse";
 import type { FoodCandidate, FoodRecord, NutrientMap, Portion, SearchResponse } from "../../shared/types";
 import { findSizeWord, findVolumeUnit, looksLikeMass } from "../../shared/units";
-import { ensureBudget, getJson } from "./http";
+import { ensureBudget, getJson, queryString } from "./http";
 import { ProviderError, type FoodProvider, type ProviderContext, type SearchOptions } from "./types";
 
 const BASE = "https://api.nal.usda.gov/fdc/v1";
@@ -244,12 +244,8 @@ export const usdaProvider: FoodProvider = {
     const key = requireKey(ctx);
     await ensureBudget(ctx, "usda", "usda");
     const types = opts.branded ? [...USDA_GENERIC_TYPES, "Branded"] : USDA_GENERIC_TYPES;
-    const url = new URL(`${BASE}/foods/search`);
-    url.searchParams.set("query", query);
-    url.searchParams.set("dataType", types.join(","));
-    url.searchParams.set("pageSize", String(opts.pageSize));
-    url.searchParams.set("api_key", key);
-    const { body } = await getJson<RawSearch>(url.toString(), "usda", ctx);
+    const url = `${BASE}/foods/search?${queryString({ query, dataType: types.join(","), pageSize: String(opts.pageSize), api_key: key })}`;
+    const { body } = await getJson<RawSearch>(url, "usda", ctx);
     const candidates: FoodCandidate[] = (body?.foods ?? []).map((f) => ({
       source: "usda",
       sourceId: String(f.fdcId),
@@ -279,12 +275,8 @@ export const usdaProvider: FoodProvider = {
     // equivalent form and accept only an exact GTIN-14 match.
     for (const form of barcode.queryForms) {
       await ensureBudget(ctx, "usda", "usda");
-      const url = new URL(`${BASE}/foods/search`);
-      url.searchParams.set("query", form);
-      url.searchParams.set("dataType", "Branded");
-      url.searchParams.set("pageSize", "10");
-      url.searchParams.set("api_key", key);
-      const { body } = await getJson<RawSearch>(url.toString(), "usda", ctx);
+      const url = `${BASE}/foods/search?${queryString({ query: form, dataType: "Branded", pageSize: "10", api_key: key })}`;
+      const { body } = await getJson<RawSearch>(url, "usda", ctx);
       const exact = (body?.foods ?? []).filter((f) => sameGtin(f.gtinUpc, barcode.gtin14));
       if (exact.length) {
         // Several FDC records can share a GTIN across label revisions; use the newest.
