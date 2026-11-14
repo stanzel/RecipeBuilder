@@ -17,6 +17,8 @@
   --tap: 44px;
 }
 
+/* Dark theme: follows the system unless the user picked a theme with the header switch
+   (data-theme="light" | "dark" on <html>, set by /theme-init.js and the app). */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #121513;
@@ -33,7 +35,28 @@
     --error-bg: #3d1f1d;
     --note-bg: #1d2832;
     --mark: #5a4d12;
+    color-scheme: dark;
   }
+}
+:root[data-theme="dark"] {
+  --bg: #121513;
+  --card: #1b201d;
+  --text: #e7ece8;
+  --muted: #a3ada7;
+  --border: #333b36;
+  --accent: #6fbf86;
+  --accent-text: #0d1a11;
+  --accent-soft: #213027;
+  --danger: #f08b84;
+  --warn-bg: #3a3015;
+  --warn-border: #7a6526;
+  --error-bg: #3d1f1d;
+  --note-bg: #1d2832;
+  --mark: #5a4d12;
+  color-scheme: dark;
+}
+:root[data-theme="light"] {
+  color-scheme: light;
 }
 
 * {
@@ -59,10 +82,39 @@ body {
   color: var(--accent-text);
   padding: calc(10px + env(safe-area-inset-top)) 16px 10px;
 }
-.topbar h1 {
-  margin: 0 auto;
+.topbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
   max-width: 720px;
+  margin: 0 auto;
+}
+.topbar h1 {
+  margin: 0;
   font-size: 1.15rem;
+}
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: var(--tap);
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent-text) 45%, transparent);
+  background: transparent;
+  color: var(--accent-text);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.theme-toggle:focus-visible {
+  outline-color: var(--accent-text);
+}
+.theme-toggle svg {
+  width: 18px;
+  height: 18px;
 }
 
 main {

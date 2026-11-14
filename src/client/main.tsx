@@ -7,6 +7,7 @@ import { BarcodePanel } from "./BarcodePanel";
 import { copyText, formatRecipeText, safeRecipeUrl } from "./format";
 import { IngredientCard } from "./IngredientCard";
 import { emptyRecipe, loadRecipe, newId, saveRecipe, type Recipe } from "./store";
+import { ThemeToggle } from "./ThemeToggle";
 import { Totals } from "./Totals";
 import { ErrorBox } from "./ui";
 
@@ -106,7 +107,10 @@ function App() {
   return (
     <>
       <header class="topbar">
-        <h1>Recipe nutrition</h1>
+        <div class="topbar-inner">
+          <h1>Recipe nutrition</h1>
+          <ThemeToggle />
+        </div>
       </header>
       <main>
         <section class="card" aria-label="Recipe">

@@ -7,6 +7,7 @@ A mobile-first web app that totals **calories, protein, fiber, total sugars, sal
 - Edit, duplicate or remove ingredients; totals recalculate immediately. The recipe is saved in your browser's localStorage (no account).
 - Optionally save a link to the original recipe (only `http`/`https` links are accepted and shown).
 - **Copy recipe** puts a formatted plain-text version on the clipboard: name, link, portions, ingredients with weights and sources, the nutrition table with partial/derived markers, and data credits.
+- A light/dark switch in the header. It follows the system setting until you tap it; your choice is then remembered in this browser across sessions (`localStorage`), and `public/theme-init.js` applies it before the first paint so there's no flash.
 - The footer shows the app version, build (git commit; `+dirty` for local builds with uncommitted changes) and build date (UTC), injected at build time by `scripts/build-client.mjs`.
 
 Stack: TypeScript, Preact (UI), esbuild (client bundle), Vitest (tests), Wrangler (dev/deploy). No database.
