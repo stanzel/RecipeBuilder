@@ -4,6 +4,7 @@ import { calculateRecipe, formatNutrient, isValidPortionCount, type Ingredient }
 import { parseIngredientLine } from "../shared/parse";
 import { api, ApiError } from "./api";
 import { BarcodePanel } from "./BarcodePanel";
+import { copyText, formatRecipeText, safeRecipeUrl } from "./format";
 import { IngredientCard } from "./IngredientCard";
 import { emptyRecipe, loadRecipe, newId, saveRecipe, type Recipe } from "./store";
 import { Totals } from "./Totals";
@@ -35,7 +36,7 @@ async function buildSampleRecipe(): Promise<Recipe> {
     withRecord("250 g chicken breast", chicken),
   ];
   if (mix.record) ingredients.push({ id: newId(), quantity: 2, unit: "serving", food: mix.record.name, record: mix.record });
-  return { version: 1, name: "Sample check recipe", portions: 4, ingredients };
+  return { version: 1, name: "Sample check recipe", url: "", portions: 4, ingredients };
 }
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
   const [saved, setSaved] = useState(true);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [copyStatus, setCopyStatus] = useState<string>("");
 
   useEffect(() => setSaved(saveRecipe(recipe)), [recipe]);
 
@@ -85,6 +87,15 @@ function App() {
     }
   }
 
+  const recipeUrl = safeRecipeUrl(recipe.url);
+  const urlInvalid = !!recipe.url?.trim() && !recipeUrl;
+
+  async function copyRecipe() {
+    const ok = await copyText(formatRecipeText(recipe, result));
+    setCopyStatus(ok ? "Copied to clipboard." : "Couldn't copy automatically — select the preview text below and copy it.");
+    window.setTimeout(() => setCopyStatus(""), 4000);
+  }
+
   function newRecipe() {
     if (recipe.ingredients.length && !confirm("Start a new recipe? The current one will be cleared from this browser.")) return;
     const r = emptyRecipe();
@@ -103,6 +114,26 @@ function App() {
             <span>Recipe name</span>
             <input value={recipe.name} placeholder="Untitled recipe" onInput={(e) => update((r) => ({ ...r, name: (e.target as HTMLInputElement).value }))} />
           </label>
+          <label class="field">
+            <span>Recipe link (optional)</span>
+            <input
+              type="url"
+              inputMode="url"
+              autoComplete="off"
+              value={recipe.url ?? ""}
+              placeholder="https://…"
+              aria-invalid={urlInvalid}
+              onInput={(e) => update((r) => ({ ...r, url: (e.target as HTMLInputElement).value }))}
+            />
+          </label>
+          {urlInvalid && <p class="field-error">Enter a web address, e.g. https://example.com/recipe.</p>}
+          {recipeUrl && (
+            <p class="small">
+              <a href={recipeUrl} target="_blank" rel="noopener noreferrer">
+                Open recipe ↗
+              </a>
+            </p>
+          )}
           <div class="field">
             <label for="portions">Portions</label>
             <div class="stepper">
@@ -186,6 +217,21 @@ function App() {
 
         <Totals result={result} />
 
+        <section class="card" aria-labelledby="copy-h">
+          <h2 id="copy-h">Copy recipe</h2>
+          <p class="muted small">Copies the recipe name, link, ingredients and nutrition table as formatted text you can paste into notes, email or messages.</p>
+          <button class="btn" type="button" onClick={copyRecipe}>
+            Copy to clipboard
+          </button>
+          <p class="small" aria-live="polite">
+            {copyStatus}
+          </p>
+          <details>
+            <summary class="small">Preview</summary>
+            <pre class="copy-preview">{formatRecipeText(recipe, result)}</pre>
+          </details>
+        </section>
+
         <section class="card small">
           <div class="row wrap">
             <button class="btn btn-secondary" type="button" onClick={newRecipe}>
@@ -203,6 +249,9 @@ function App() {
             Food data: <a href="https://fdc.nal.usda.gov/" target="_blank" rel="noopener noreferrer">USDA FoodData Central</a> (public domain, CC0) and{" "}
             <a href="https://world.openfoodfacts.org/" target="_blank" rel="noopener noreferrer">Open Food Facts</a> contributors, available under the{" "}
             <a href="https://opendatacommons.org/licenses/odbl/1-0/" target="_blank" rel="noopener noreferrer">Open Database License</a>. Values are estimates; check labels for allergies or medical diets.
+          </p>
+          <p class="version">
+            Version {__APP_VERSION__} · build {__BUILD_ID__} · {new Date(__BUILD_DATE__).toISOString().slice(0, 16).replace("T", " ")} UTC
           </p>
         </footer>
       </main>

@@ -5,6 +5,9 @@ A mobile-first web app that totals **calories, protein, fiber, total sugars, sal
 - Add ingredients by **scanning a barcode**, **typing a barcode**, **searching a food name**, or typing a line such as `4 large potatoes`, `1½ cups cooked rice`, or `250 g chicken breast`.
 - Confirm the exact food (raw vs cooked, salted vs unsalted…). Generic and branded foods are labelled, and every ingredient shows its source.
 - Edit, duplicate or remove ingredients; totals recalculate immediately. The recipe is saved in your browser's localStorage (no account).
+- Optionally save a link to the original recipe (only `http`/`https` links are accepted and shown).
+- **Copy recipe** puts a formatted plain-text version on the clipboard: name, link, portions, ingredients with weights and sources, the nutrition table with partial/derived markers, and data credits.
+- The footer shows the app version, build (git commit; `+dirty` for local builds with uncommitted changes) and build date (UTC), injected at build time by `scripts/build-client.mjs`.
 
 Stack: TypeScript, Preact (UI), esbuild (client bundle), Vitest (tests), Wrangler (dev/deploy). No database.
 

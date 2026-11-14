@@ -14,7 +14,7 @@ interface Props {
 export function MatchPanel({ initialQuery, onPick, onManual, onCancel }: Props) {
   const [query, setQuery] = useState(initialQuery);
   const [source, setSource] = useState<SourceId>("usda");
-  const [branded, setBranded] = useState(false);
+  const [branded, setBranded] = useState(true); // branded foods included by default
   const [results, setResults] = useState<FoodCandidate[] | null>(null);
   const [loading, setLoading] = useState(false);
   const [picking, setPicking] = useState<string | null>(null);
@@ -45,7 +45,7 @@ export function MatchPanel({ initialQuery, onPick, onManual, onCancel }: Props) 
   }
 
   useEffect(() => {
-    if (initialQuery.trim().length >= 2) run(initialQuery, "usda", false);
+    if (initialQuery.trim().length >= 2) run(initialQuery, "usda", true);
   }, []);
 
   async function pick(c: FoodCandidate) {

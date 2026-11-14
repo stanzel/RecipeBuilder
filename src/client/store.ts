@@ -4,6 +4,8 @@ import { isValidPortionCount } from "../shared/nutrition";
 export interface Recipe {
   version: 1;
   name: string;
+  /** Optional link to the original recipe (validated to http/https before display). */
+  url?: string;
   portions: number;
   ingredients: Ingredient[];
 }
@@ -11,7 +13,7 @@ export interface Recipe {
 const KEY = "recipe-nutrition:current:v1";
 
 export function emptyRecipe(): Recipe {
-  return { version: 1, name: "", portions: 4, ingredients: [] };
+  return { version: 1, name: "", url: "", portions: 4, ingredients: [] };
 }
 
 export function newId(): string {
@@ -32,6 +34,7 @@ export function loadRecipe(): Recipe {
     return {
       version: 1,
       name: typeof r.name === "string" ? r.name : "",
+      url: typeof r.url === "string" ? r.url : "",
       portions: isValidPortionCount(r.portions) ? r.portions : 1,
       ingredients: r.ingredients.filter((i) => i && typeof i.id === "string" && typeof i.quantity === "number"),
     };
