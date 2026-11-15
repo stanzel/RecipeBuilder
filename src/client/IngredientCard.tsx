@@ -139,14 +139,23 @@ export function IngredientCard({ ingredient: ing, nutrition, onChange, onRemove,
   const amt = nutrition.amount;
 
   const title = ing.text || `${describeAmount(ing)} ${ing.food}`.trim();
+  const cal = nutrition.calories;
 
   return (
-    <li id={`ing-${ing.id}`} class={`card ingredient ${nutrition.status !== "ok" ? "needs-attention" : ""}`}>
+    <li id={`ing-${ing.id}`} class={`card ingredient ${nutrition.status !== "ok" || cal.needsReview ? "needs-attention" : ""}`}>
       <div class="ing-head">
         <div>
           <div class="ing-amount">
             {describeAmount(ing)}{" "}
             <span class="ing-food">{rec ? rec.name : ing.food || "(no food yet)"}</span>
+            {cal.needsReview && (
+              <>
+                {" "}
+                <span class="badge badge-review">
+                  <span aria-hidden="true">⚠</span> Needs review
+                </span>
+              </>
+            )}
           </div>
           {ing.text && <div class="muted small">Typed: “{ing.text}”</div>}
         </div>
@@ -201,6 +210,31 @@ export function IngredientCard({ ingredient: ing, nutrition, onChange, onRemove,
       {nutrition.status === "ok" && nutrition.missing.length > 0 && (
         <p class="muted small">
           Not reported by this source: {nutrition.missing.map((k) => SHORT[k] || "calories").join(", ")}. Recipe totals for these are marked partial.
+        </p>
+      )}
+      {rec && cal.needsReview && (
+        <div class="alert alert-warn review-alert" role="status">
+          <p>
+            {cal.reason === "zero"
+              ? "This food lists 0 kcal. That's right for water, black coffee, diet soda or plain tea, but may be a data error. Check the label or source."
+              : "This food has no calorie value, which is likely a data error. Check the label or source, or enter the values yourself."}
+          </p>
+          <button
+            class="btn btn-secondary"
+            type="button"
+            onClick={() => onChange({ caloriesReviewedFor: rec.id })}
+            aria-label={`Mark calories for ${title} as reviewed`}
+          >
+            {cal.reason === "zero" ? "Yes, 0 kcal is correct" : "Mark as reviewed"}
+          </button>
+        </div>
+      )}
+      {rec && cal.reviewed && (
+        <p class="muted small review-done">
+          <span aria-hidden="true">✓</span> {cal.reason === "zero" ? "0 kcal confirmed by you." : "Missing calories reviewed by you."}{" "}
+          <button class="link" type="button" onClick={() => onChange({ caloriesReviewedFor: undefined })}>
+            Undo
+          </button>
         </p>
       )}
       {rec?.warnings?.map((w) => (

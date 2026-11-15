@@ -54,6 +54,39 @@ export interface Ingredient {
   gramsPerUnitOverride?: number;
   /** The single confirmed nutrition record. Never merged with another. */
   record?: FoodRecord;
+  /**
+   * Record id whose zero/missing calories the user marked as reviewed.
+   * Tied to the record so choosing a different food brings the flag back.
+   */
+  caloriesReviewedFor?: string;
+}
+
+// ---------------------------------------------------------------------------
+// Calorie review flag (display only; never affects totals)
+// ---------------------------------------------------------------------------
+
+export interface CalorieReview {
+  /** Why calories look suspicious; undefined when they look fine. */
+  reason?: "zero" | "missing";
+  /** The user confirmed this entry's calories for its current record. */
+  reviewed: boolean;
+  /** Show the "Needs review" flag. */
+  needsReview: boolean;
+}
+
+/**
+ * Flag an entry whose food lists 0 kcal, or whose calories are missing, blank,
+ * null or not a finite number. Checks the record's own value (per its basis),
+ * so a small amount of a caloric food is not flagged. Entries without a chosen
+ * food are not flagged here: they already show their own prompt and aren't counted.
+ */
+export function calorieReview(ing: Ingredient): CalorieReview {
+  const rec = ing.record;
+  if (!rec) return { reviewed: false, needsReview: false };
+  const v: unknown = rec.nutrients?.energyKcal?.value;
+  const reason = typeof v !== "number" || !Number.isFinite(v) ? "missing" : v === 0 ? "zero" : undefined;
+  const reviewed = !!reason && ing.caloriesReviewedFor === rec.id;
+  return { reason, reviewed, needsReview: !!reason && !reviewed };
 }
 
 export interface AmountResult {
@@ -290,13 +323,16 @@ export interface IngredientNutrition {
   values: Partial<Record<NutrientKey, { value: number; derived: boolean }>>;
   missing: NutrientKey[];
   status: "ok" | "unconfirmed" | "needs_amount";
+  /** Zero/missing-calorie review flag. Informational only. */
+  calories: CalorieReview;
 }
 
 export function ingredientNutrition(ing: Ingredient): IngredientNutrition {
-  if (!ing.record) return { ingredient: ing, values: {}, missing: [...NUTRIENT_KEYS], status: "unconfirmed" };
+  const calories = calorieReview(ing);
+  if (!ing.record) return { ingredient: ing, values: {}, missing: [...NUTRIENT_KEYS], status: "unconfirmed", calories };
   const amount = resolveAmount(ing, ing.record);
   if (!amount.ok || amount.multiplier === undefined) {
-    return { ingredient: ing, amount, values: {}, missing: [...NUTRIENT_KEYS], status: "needs_amount" };
+    return { ingredient: ing, amount, values: {}, missing: [...NUTRIENT_KEYS], status: "needs_amount", calories };
   }
   const values: IngredientNutrition["values"] = {};
   const missing: NutrientKey[] = [];
@@ -308,7 +344,7 @@ export function ingredientNutrition(ing: Ingredient): IngredientNutrition {
       values[k] = { value: nv.value * amount.multiplier, derived: !!nv.derived };
     }
   }
-  return { ingredient: ing, amount, values, missing, status: "ok" };
+  return { ingredient: ing, amount, values, missing, status: "ok", calories };
 }
 
 export interface RecipeResult {
@@ -318,6 +354,8 @@ export interface RecipeResult {
   portions: number;
   /** True if any nutrient total is partial. */
   anyPartial: boolean;
+  /** Entries flagged for calorie review (zero or missing kcal, not yet reviewed). */
+  needsReviewCount: number;
 }
 
 export function isValidPortionCount(n: unknown): n is number {
@@ -352,7 +390,8 @@ export function calculateRecipe(ingredients: Ingredient[], portions: number): Re
     total[k] = { value, partial, derived, missingFrom };
     perPortion[k] = { value: value / portions, partial, derived, missingFrom };
   }
-  return { perIngredient, total, perPortion, portions, anyPartial };
+  const needsReviewCount = perIngredient.filter((r) => r.calories.needsReview).length;
+  return { perIngredient, total, perPortion, portions, anyPartial, needsReviewCount };
 }
 
 // ---------------------------------------------------------------------------

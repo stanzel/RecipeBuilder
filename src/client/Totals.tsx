@@ -15,6 +15,15 @@ export function Totals({ result }: { result: RecipeResult }) {
         <p class="muted">Add ingredients to see totals.</p>
       ) : (
         <>
+          {result.needsReviewCount > 0 && (
+            <p class="alert alert-warn review-count" role="status">
+              <span aria-hidden="true">⚠</span>{" "}
+              <a href={`#ing-${result.perIngredient.find((r) => r.calories.needsReview)!.ingredient.id}`}>
+                {result.needsReviewCount === 1 ? "1 ingredient needs" : `${result.needsReviewCount} ingredients need`} review
+              </a>{" "}
+              (0 or missing calories). Totals are calculated as usual.
+            </p>
+          )}
           <table>
             <thead>
               <tr>

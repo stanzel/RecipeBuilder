@@ -321,6 +321,15 @@ a {
 .badge-manual {
   background: var(--warn-bg);
 }
+.badge-review {
+  background: var(--warn-bg);
+  border-color: var(--warn-border);
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.review-alert p {
+  margin: 0 0 8px;
+}
 .brand {
   font-weight: 600;
 }

@@ -269,6 +269,7 @@ function App() {
               Per portion: {formatNutrient("energyKcal", result.perPortion.energyKcal.value)}
               {result.perPortion.energyKcal.partial ? "*" : ""} · {formatNutrient("protein", result.perPortion.protein.value)} protein
               {result.perPortion.protein.partial ? "*" : ""}
+              {result.needsReviewCount > 0 && <> · ⚠ {result.needsReviewCount} to review</>}
             </>
           )}
         </a>

@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   calculateRecipe,
+  calorieReview,
   completeSaltSodium,
   formatNutrient,
   ingredientNutrition,
@@ -256,5 +257,67 @@ describe("recipe totals", () => {
     expect(formatNutrient("saltG", 0.2214)).toBe("0.22 g");
     expect(formatNutrient("sodiumMg", 88.56)).toBe("89 mg");
     expect(formatNutrient("protein", 30.258)).toBe("30.3 g");
+  });
+});
+
+describe("calorie review flag", () => {
+  const manual = (id: string, energyKcal: unknown): FoodRecord => ({
+    id: `manual:${id}`,
+    source: "manual",
+    sourceId: id,
+    sourceName: "Manual entry",
+    kind: "manual",
+    name: id,
+    basis: "per100g",
+    nutrients: energyKcal === undefined ? { protein: { value: 1 } } : ({ energyKcal: { value: energyKcal }, protein: { value: 1 } } as any),
+    portions: [],
+    attribution: "Entered by you",
+    license: "",
+    fetchedAt: "2026-11-14T00:00:00.000Z",
+  });
+  const g100 = (record?: FoodRecord, extra: Partial<Parameters<typeof ing>[0]> = {}) => ing({ quantity: 100, unit: "g", record, ...extra });
+
+  it("flags 0 kcal", () => {
+    expect(calorieReview(g100(manual("zero", 0)))).toEqual({ reason: "zero", reviewed: false, needsReview: true });
+  });
+
+  it.each([
+    ["missing", undefined],
+    ["null", null],
+    ["blank", ""],
+    ["non-numeric", "abc"],
+    ["NaN", NaN],
+  ])("flags %s calories as missing", (_label, v) => {
+    expect(calorieReview(g100(manual("x", v)))).toEqual({ reason: "missing", reviewed: false, needsReview: true });
+  });
+
+  it("does not flag a normal entry", () => {
+    expect(calorieReview(g100(chicken()))).toEqual({ reason: undefined, reviewed: false, needsReview: false });
+  });
+
+  it("does not flag an entry without a chosen food", () => {
+    expect(calorieReview(g100(undefined, { food: "water" })).needsReview).toBe(false);
+  });
+
+  it("clears the flag once reviewed, and brings it back if the food changes", () => {
+    const water = manual("water", 0);
+    const confirmed = g100(water, { caloriesReviewedFor: water.id });
+    expect(calorieReview(confirmed)).toEqual({ reason: "zero", reviewed: true, needsReview: false });
+    const changed = { ...confirmed, record: manual("other", 0) };
+    expect(calorieReview(changed).needsReview).toBe(true);
+  });
+
+  it("counts flagged entries and leaves totals unchanged", () => {
+    const water = manual("water", 0);
+    const list = [g100(chicken()), g100(manual("zero", 0)), g100(manual("blank", "")), g100(water, { caloriesReviewedFor: water.id })];
+    const withFlags = calculateRecipe(list, 2);
+    expect(withFlags.needsReviewCount).toBe(2);
+    // Same totals as computing without any review state.
+    const plain = calculateRecipe(list.map(({ caloriesReviewedFor, ...rest }) => rest), 2);
+    expect(plain.needsReviewCount).toBe(3);
+    expect(withFlags.total).toEqual(plain.total);
+    expect(withFlags.total.energyKcal.value).toBeCloseTo(chicken().nutrients.energyKcal!.value, 6);
+    // Zero counts as a real 0; blank stays "missing" (partial), as before.
+    expect(withFlags.total.energyKcal.missingFrom).toEqual(["blank"]);
   });
 });
